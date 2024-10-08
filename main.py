@@ -36,10 +36,10 @@ def create_bet_description_table(connection):
         name VARCHAR(255) NOT NULL,
         experiation_date DATE,
         website VARCHAR(255),
-        event_type SET(election, fed, crypto, intl_politics, financial),
-        status ENUM(open, closed),
-        is_arbitrage ENUM(yes, no)
-    )
+        event_type SET('election', 'fed', 'crypto', 'intl_politics', 'financial'),
+        status ENUM('open', 'closed'),
+        is_arbitrage ENUM('yes', 'no')
+        )
     """
     try:
         with connection.cursor() as cursor:
