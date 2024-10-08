@@ -598,6 +598,7 @@ def manage_arbitrage_opportunities(connection):
 connection = create_connection()
 if connection is None:
     print("Error")
+<<<<<<< HEAD
 else:
     # Create necessary tables
     create_bet_description_table(connection)
@@ -607,3 +608,153 @@ else:
     
     # Start the main menu
     main_menu(connection)
+=======
+
+create_bet_description_table(connection)
+
+while True:
+    print("1. Add a bet_description")
+    print("2. View all bet_description")
+    print("3. Update a bet_description")
+    print("4. Delete a bet_description")
+    print("5. Exit")
+        
+    choice = input("Enter your choice (1-5): ")
+        
+    if choice == '1':
+            add_bet_description(connection)
+    elif choice == '2':
+            view_bet_description(connection)
+    elif choice == '3':
+            update_bet_description(connection)
+    elif choice == '4':
+            delete_bet_description(connection)
+    elif choice == '5':
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
+    connection.close()
+    print("Connection Closed")
+
+#bet_choice table
+def create_bet_choice_table(connection):
+    create_table_query = """
+    CREATE TABLE IF NOT EXISTS bet_choice (
+        option_id INT AUTO_INCREMENT PRIMARY KEY,
+        bet_id INT,
+        name VARCHAR(255) NOT NULL,
+        outcome ENUM('pending', 'win', 'lose'),
+        FOREIGN KEY (bet_id) REFERENCES bet_description(bet_id)
+    )
+    """
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(create_table_query)
+            connection.commit()
+            print("Table 'bet_choice' created successfully")
+    except Error as e:
+        print(f"Error creating table: {e}")
+
+def add_bet_choice(connection):
+    bet_id = input("Enter the bet ID: ")
+    name = input("Enter option name: ")
+    outcome = input("Enter outcome (pending/win/lose): ")
+    
+    query = """
+    INSERT INTO bet_choice (bet_id, name, outcome)
+    VALUES (%s, %s, %s)
+    """
+    values = (bet_id, name, outcome)
+    
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, values)
+            connection.commit()
+            print(f"Bet choice added with ID: {cursor.lastrowid}")
+    except Error as e:
+        print(f"Error adding bet choice: {e}")
+
+def view_bet_choice(connection):
+    query = "SELECT * FROM bet_choice"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            results = cursor.fetchall()
+            if not results:
+                print("No bet choices found in the database.")
+            else:
+                for choice in results:
+                    print(f"\nOption ID: {choice[0]}")
+                    print(f"Bet ID: {choice[1]}")
+                    print(f"Name: {choice[2]}")
+                    print(f"Outcome: {choice[3]}")
+    except Error as e:
+        print(f"Error retrieving bet choices: {e}")
+
+#price table
+def create_price_table(connection):
+    create_table_query = """
+    CREATE TABLE IF NOT EXISTS price (
+        option_id INT,
+        timestamp DATETIME,
+        volume DECIMAL(10, 2),
+        yes_price DECIMAL(10, 2),
+        no_price DECIMAL(10, 2),
+        yes_odds DECIMAL(10, 2),
+        no_odds DECIMAL(10, 2),
+        PRIMARY KEY (option_id, timestamp),
+        FOREIGN KEY (option_id) REFERENCES bet_choice(option_id)
+    )
+    """
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(create_table_query)
+            connection.commit()
+            print("Table 'price' created successfully")
+    except Error as e:
+        print(f"Error creating table: {e}")
+
+def add_price(connection):
+    option_id = input("Enter option ID: ")
+    timestamp = input("Enter timestamp (YYYY-MM-DD HH:MM:SS): ")
+    volume = input("Enter volume: ")
+    yes_price = input("Enter yes price: ")
+    no_price = input("Enter no price: ")
+    yes_odds = input("Enter yes odds: ")
+    no_odds = input("Enter no odds: ")
+
+    query = """
+    INSERT INTO price (option_id, timestamp, volume, yes_price, no_price, yes_odds, no_odds)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
+    """
+    values = (option_id, timestamp, volume, yes_price, no_price, yes_odds, no_odds)
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, values)
+            connection.commit()
+            print("Price added successfully")
+    except Error as e:
+        print(f"Error adding price: {e}")
+
+def view_price(connection):
+    query = "SELECT * FROM price"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            results = cursor.fetchall()
+            if not results:
+                print("No prices found in the database.")
+            else:
+                for price in results:
+                    print(f"\nOption ID: {price[0]}")
+                    print(f"Timestamp: {price[1]}")
+                    print(f"Volume: {price[2]}")
+                    print(f"Yes Price: {price[3]}")
+                    print(f"No Price: {price[4]}")
+                    print(f"Yes Odds: {price[5]}")
+                    print(f"No Odds: {price[6]}")
+    except Error as e:
+        print(f"Error retrieving prices: {e}")
+>>>>>>> c85702ceeef5a710c2a98190feaff6d185667b43
