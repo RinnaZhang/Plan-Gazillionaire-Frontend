@@ -596,7 +596,7 @@ def join_bet_data(connection):
     SELECT 
         bd.bet_id, 
         bd.name AS bet_name, 
-        bd.experation_date, 
+        bd.expiration_date, 
         bd.website, 
         bd.event_type, 
         bd.status, 
@@ -658,34 +658,6 @@ def join_bet_data(connection):
                     print("-------------------------")
     except Error as e:
         print(f"Error retrieving data: {e}")
-
-""" *** main menu *** """
-
-def main_menu(connection):
-    while True:
-        print("\nMain Menu:")
-        print("1. Add a bet_description")
-        print("2. View all bet_description")
-        print("3. Update a bet_description")
-        print("4. Delete a bet_description")
-        print("5. Exit")
-        
-        choice = input("Enter your choice (1-5): ")
-        
-        if choice == '1':
-            add_bet_description(connection)
-        elif choice == '2':
-            view_bet_description(connection)
-        elif choice == '3':
-            update_bet_description(connection)
-        elif choice == '4':
-            delete_bet_description(connection)
-        elif choice == '5':
-            print("Exiting program...")
-            break
-        else:
-            print("Invalid choice. Please enter a valid option (1-5).")
-
 
 """ *** main *** """
 

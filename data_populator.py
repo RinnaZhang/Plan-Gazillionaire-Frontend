@@ -5,14 +5,14 @@ from mysql.connector import Error
 
 def insert_bet_descriptions(connection):
     query = """
-    INSERT INTO bet_description (bet_id, name, expiration_date, website, event_type, status, is_arbitrage)
-    VALUES (%s, %s, %s, %s, %s, %s, %s)
+    INSERT INTO bet_description (name, expiration_date, website, event_type, status, is_arbitrage)
+    VALUES (%s, %s, %s, %s, %s, %s)
     """
     values = [
-        (1, 'US Presidential Election 2024', '2024-11-05', 'polymarket', 'election', 'open', 'yes'),
-        (2, 'Federal Interest Rate Hike by December', '2024-12-15', 'kalshi', 'fed', 'open', 'no'),
-        (3, 'Bitcoin price to hit $50k by 2024', '2024-12-31', 'polymarket', 'crypto', 'open', 'no'),
-        (4, 'US Inflation to exceed 5% in Q4', '2024-12-31', 'kalshi', 'financial', 'open', 'yes')
+        ('US Presidential Election 2024', '2024-11-05', 'polymarket', 'election', 'open', 'yes'),
+        ('Federal Interest Rate Hike by December', '2024-12-15', 'kalshi', 'fed', 'open', 'no'),
+        ('Bitcoin price to hit $50k by 2024', '2024-12-31', 'polymarket', 'crypto', 'open', 'no'),
+        ('US Inflation to exceed 5% in Q4', '2024-12-31', 'kalshi', 'financial', 'open', 'yes')
     ]
     
     try:
