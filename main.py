@@ -590,7 +590,74 @@ def manage_arbitrage_opportunities(connection):
             break
         else:
             print("Invalid choice. Please try again.")
+            
+def join_bet_data(connection):
+    query = """
+    SELECT 
+        bd.bet_id, 
+        bd.name AS bet_name, 
+        bd.experation_date, 
+        bd.website, 
+        bd.event_type, 
+        bd.status, 
+        bd.is_arbitrage,
+        bc.option_id, 
+        bc.name AS option_name, 
+        bc.outcome, 
+        p.timestamp AS price_timestamp, 
+        p.volume, 
+        p.yes_price, 
+        p.no_price, 
+        p.yes_odds, 
+        p.no_odds, 
+        ao.arb_id, 
+        ao.bet_id1, 
+        ao.bet_id2, 
+        ao.timestamp AS arbitrage_timestamp, 
+        ao.profit
+    FROM 
+        bet_description bd
+    JOIN 
+        bet_choice bc ON bd.bet_id = bc.bet_id
+    JOIN 
+        price p ON bc.option_id = p.option_id
+    LEFT JOIN 
+        arbitrage_opportunities ao ON bd.bet_id = ao.bet_id1 OR bd.bet_id = ao.bet_id2;
+    """
+    
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            results = cursor.fetchall()
 
+            if not results:
+                print("No data found in the database.")
+            else:
+                for row in results:
+                    print(f"Bet ID: {row[0]}")
+                    print(f"Bet Name: {row[1]}")
+                    print(f"Expiration Date: {row[2]}")
+                    print(f"Website: {row[3]}")
+                    print(f"Event Type: {row[4]}")
+                    print(f"Status: {row[5]}")
+                    print(f"Is Arbitrage: {row[6]}")
+                    print(f"Option ID: {row[7]}")
+                    print(f"Option Name: {row[8]}")
+                    print(f"Outcome: {row[9]}")
+                    print(f"Price Timestamp: {row[10]}")
+                    print(f"Volume: {row[11]}")
+                    print(f"Yes Price: {row[12]}")
+                    print(f"No Price: {row[13]}")
+                    print(f"Yes Odds: {row[14]}")
+                    print(f"No Odds: {row[15]}")
+                    print(f"Arbitrage ID: {row[16]}")
+                    print(f"Arbitrage Bet ID 1: {row[17]}")
+                    print(f"Arbitrage Bet ID 2: {row[18]}")
+                    print(f"Arbitrage Timestamp: {row[19]}")
+                    print(f"Arbitrage Profit: {row[20]}")
+                    print("-------------------------")
+    except Error as e:
+        print(f"Error retrieving data: {e}")
 
 """ *** main *** """
 
@@ -604,6 +671,7 @@ else:
     create_bet_choice_table(connection)  # Implement similarly to bet_description
     create_price_table(connection)       # Implement similarly to bet_description
     create_arbitrage_opportunities_table(connection)
+    join_bet_data(connection)
     
     # Start the main menu
     main_menu(connection)
