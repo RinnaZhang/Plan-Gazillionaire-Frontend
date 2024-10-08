@@ -26,34 +26,27 @@ Plan-Gazillionaire is a project designed to provide arbitrage opportunities for 
 ## Installation
 
 1. **Clone the repository**:
- ```bash
  git clone https://github.com/phat-do-nyu/Plan-Gazillionaire.git
 
 2. **Navigate to the project directory**:
- ```bash
  cd path/to/Plan-Gazillionaire
 
 3. **Create a virtual environment (optional but recommended)**:
- ```bash
  python -m venv .venv
 
  **On Windows**:
- ```bash
  .venv\Scripts\activate
 
  **On Mac**:
- ```bash
  source .venv/bin/activate
 
 4. **Install the required packages**:
- ```bash
  pip install -r requirements.txt
 
 5. **Set up your .env file**:
  a. Create a new file in the project root directory and name it .env.
  b. Open the .env file in a text editor.
  c. Add your MySQL connection details in the following format: 
- ```bash
  DB_HOST=your_mysql_host
  DB_USER=your_mysql_username
  DB_PASS=your_mysql_password
@@ -62,7 +55,6 @@ Plan-Gazillionaire is a project designed to provide arbitrage opportunities for 
 6. **Note**: The .env file contains sensitive information. Make sure it's included in your .gitignore file.
 
 7. **Run the application**:
-```bash
 python main.py
 
 Features -------- 
