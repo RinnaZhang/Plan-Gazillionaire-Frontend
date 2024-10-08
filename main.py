@@ -102,7 +102,7 @@ def update_bet_description(connection):
     field = input("Enter the field to update (name/expirition_date/website/event_type/status/is_arbitrage): ")
     value = input("Enter the new value: ")
     
-    query = f"UPDATE bet_description SET {field} = %s WHERE id = %s"
+    query = f"UPDATE bet_description SET {field} = %s WHERE bet_id = %s"
     values = (value, bet_id)
     
     try:
@@ -120,7 +120,7 @@ def update_bet_description(connection):
 def delete_bet_description(connection):
     bet_id = input("Enter the ID of the bet to delete: ")
     
-    query = "DELETE FROM bet_description WHERE id = %s"
+    query = "DELETE FROM bet_description WHERE bet_id = %s"
     value = (bet_id,)
     
     try:
@@ -678,8 +678,8 @@ def main():
             join_bet_data(connection)
 
             # Step 2: Populate the database with initial data from data_populator
-            print("Populating database with sample data...")
-            populate_database(connection)  # Call to the data population function
+            #print("Populating database with sample data...")
+            #populate_database(connection)  # Call to the data population function
             
             # Step 3: Start the main menu for user interaction
             main_menu(connection)
