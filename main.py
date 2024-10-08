@@ -88,7 +88,7 @@ def view_bet_description(connection):
                 for bet in results:
                     print(f"\nID: {bet[0]}")
                     print(f"name: {bet[1]}")
-                    print(f"expiration_date: {bet[2]}")
+                    print(f"expirition_date: {bet[2]}")
                     print(f"website: {bet[3]}")
                     print(f"event_type: {bet[4]}")
                     print(f"status: ${bet[5]}")
@@ -99,7 +99,7 @@ def view_bet_description(connection):
 # update bets from bet_description table
 def update_bet_description(connection):
     bet_id = input("Enter the ID of the bet to update: ")
-    field = input("Enter the field to update (name/expiration_date/website/event_type/status/is_arbitrage): ")
+    field = input("Enter the field to update (name/expirition_date/website/event_type/status/is_arbitrage): ")
     value = input("Enter the new value: ")
     
     query = f"UPDATE bet_description SET {field} = %s WHERE id = %s"
@@ -596,7 +596,7 @@ def join_bet_data(connection):
     SELECT 
         bd.bet_id, 
         bd.name AS bet_name, 
-        bd.expiration_date, 
+        bd.experation_date, 
         bd.website, 
         bd.event_type, 
         bd.status, 
@@ -659,19 +659,63 @@ def join_bet_data(connection):
     except Error as e:
         print(f"Error retrieving data: {e}")
 
+""" *** main menu *** """
+
+def main_menu(connection):
+    while True:
+        print("\nMain Menu:")
+        print("1. Add a bet_description")
+        print("2. View all bet_description")
+        print("3. Update a bet_description")
+        print("4. Delete a bet_description")
+        print("5. Exit")
+        
+        choice = input("Enter your choice (1-5): ")
+        
+        if choice == '1':
+            add_bet_description(connection)
+        elif choice == '2':
+            view_bet_description(connection)
+        elif choice == '3':
+            update_bet_description(connection)
+        elif choice == '4':
+            delete_bet_description(connection)
+        elif choice == '5':
+            print("Exiting program...")
+            break
+        else:
+            print("Invalid choice. Please enter a valid option (1-5).")
+
+
 """ *** main *** """
 
-#main
-connection = create_connection()
-if connection is None:
-     print("Error")
-else:
-    # Create necessary tables
-    create_bet_description_table(connection)
-    create_bet_choice_table(connection)  # Implement similarly to bet_description
-    create_price_table(connection)       # Implement similarly to bet_description
-    create_arbitrage_opportunities_table(connection)
-    join_bet_data(connection)
-    
-    # Start the main menu
-    main_menu(connection)
+from data_populator import populate_database  # Importing the function that populates the database
+
+def main():
+    connection = create_connection()
+
+    if connection is None:
+        print("Error: Could not establish a database connection.")
+    else:
+        try:
+            # Step 1: Create necessary tables (assuming these functions are already defined)
+            create_bet_description_table(connection)
+            create_bet_choice_table(connection)
+            create_price_table(connection)
+            create_arbitrage_opportunities_table(connection)
+            join_bet_data(connection)
+
+            # Step 2: Populate the database with initial data from data_populator
+            print("Populating database with sample data...")
+            populate_database(connection)  # Call to the data population function
+            
+            # Step 3: Start the main menu for user interaction
+            main_menu(connection)
+
+        finally:
+            # Step 3: Close the connection
+            connection.close()
+            print("Database connection closed.")
+
+if __name__ == "__main__":
+    main()
