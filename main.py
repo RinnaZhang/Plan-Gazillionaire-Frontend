@@ -142,9 +142,8 @@ def create_bet_choice_table(connection):
         option_id INT AUTO_INCREMENT PRIMARY KEY,
         bet_id INT,
         name VARCHAR(255) NOT NULL,
-        outcome ENUM('pending', 'win', 'lose'),
-        FOREIGN KEY (bet_id) REFERENCES bet_description(bet_id)
-    )
+        outcome ENUM('pending', 'win', 'lose') NOT NULL,
+        FOREIGN KEY (bet_id) REFERENCES bet_description(bet_id))
     """
     try:
         with connection.cursor() as cursor:
@@ -661,8 +660,6 @@ def join_bet_data(connection):
 
 """ *** main *** """
 
-from data_populator import populate_database  # Importing the function that populates the database
-
 def main():
     connection = create_connection()
 
@@ -677,10 +674,6 @@ def main():
             create_arbitrage_opportunities_table(connection)
             join_bet_data(connection)
 
-            # Step 2: Populate the database with initial data from data_populator
-            #print("Populating database with sample data...")
-            #populate_database(connection)  # Call to the data population function
-            
             # Step 3: Start the main menu for user interaction
             main_menu(connection)
 

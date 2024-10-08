@@ -25,18 +25,18 @@ def insert_bet_descriptions(connection):
 
 def insert_bet_choices(connection):
     query = """
-    INSERT INTO bet_choice (option_id, bet_id, name, outcome)
-    VALUES (%s, %s, %s, %s)
+    INSERT INTO bet_choice (bet_id, name, outcome)
+    VALUES (%s, %s, %s)
     """
     values = [
-        (1, 1, 'Biden Wins', 'pending'),
-        (2, 1, 'Trump Wins', 'pending'),
-        (3, 2, 'Rate Hike', 'pending'),
-        (4, 2, 'No Rate Hike', 'pending'),
-        (5, 3, 'BTC > $50k', 'pending'),
-        (6, 3, 'BTC < $50k', 'pending'),
-        (7, 4, 'Inflation > 5%', 'pending'),
-        (8, 4, 'Inflation ≤ 5%', 'pending')
+        (1, 'Biden Wins', 'pending'),
+        (1, 'Trump Wins', 'pending'),
+        (2, 'Rate Hike', 'pending'),
+        (2, 'No Rate Hike', 'pending'),
+        (3, 'BTC > $50k', 'pending'),
+        (3, 'BTC < $50k', 'pending'),
+        (4, 'Inflation > 5%', 'pending'),
+        (4, 'Inflation ≤ 5%', 'pending')
     ]
     
     try:
@@ -73,11 +73,11 @@ def insert_prices(connection):
 
 def insert_arbitrage_opportunities(connection):
     query = """
-    INSERT INTO arbitrage_opportunities (arb_id, bet_id1, bet_id2, timestamp, profit)
-    VALUES (%s, %s, %s, %s, %s)
+    INSERT INTO arbitrage_opportunities (bet_id1, bet_id2, timestamp, profit)
+    VALUES (%s, %s, %s, %s)
     """
     values = [
-        (1, 1, 4, '2024-10-08 12:00:00', 15.50)
+        (1, 4, '2024-10-08 12:00:00', 15.50)
     ]
     
     try:
