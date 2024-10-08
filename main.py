@@ -88,7 +88,7 @@ def view_bet_description(connection):
                 for bet in results:
                     print(f"\nID: {bet[0]}")
                     print(f"name: {bet[1]}")
-                    print(f"expirition_date: {bet[2]}")
+                    print(f"expiration_date: {bet[2]}")
                     print(f"website: {bet[3]}")
                     print(f"event_type: {bet[4]}")
                     print(f"status: ${bet[5]}")
@@ -99,7 +99,7 @@ def view_bet_description(connection):
 # update bets from bet_description table
 def update_bet_description(connection):
     bet_id = input("Enter the ID of the bet to update: ")
-    field = input("Enter the field to update (name/expirition_date/website/event_type/status/is_arbitrage): ")
+    field = input("Enter the field to update (name/expiration_date/website/event_type/status/is_arbitrage): ")
     value = input("Enter the new value: ")
     
     query = f"UPDATE bet_description SET {field} = %s WHERE id = %s"
@@ -596,7 +596,7 @@ def join_bet_data(connection):
     SELECT 
         bd.bet_id, 
         bd.name AS bet_name, 
-        bd.experation_date, 
+        bd.expiration_date, 
         bd.website, 
         bd.event_type, 
         bd.status, 
@@ -664,7 +664,7 @@ def join_bet_data(connection):
 #main
 connection = create_connection()
 if connection is None:
-    print("Error")
+     print("Error")
 else:
     # Create necessary tables
     create_bet_description_table(connection)
