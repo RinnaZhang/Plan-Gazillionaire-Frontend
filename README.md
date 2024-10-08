@@ -45,24 +45,31 @@ Plan-Gazillionaire is a project designed to provide arbitrage opportunities for 
 
 5. **Set up your .env file**:
  a. Create a new file in the project root directory and name it .env.
+ 
  b. Open the .env file in a text editor.
+ 
  c. Add your MySQL connection details in the following format: 
+    ```bash
  DB_HOST=your_mysql_host
  DB_USER=your_mysql_username
  DB_PASS=your_mysql_password
  DB_NAME=your_database_name
 
-6. **Note**: The .env file contains sensitive information. Make sure it's included in your .gitignore file.
+7. **Note**: The .env file contains sensitive information. Make sure it's included in your .gitignore file.
 
-7. **Run the application**:
+8. **Run the application**:
 python main.py
 
-Features -------- 
+## Features
+
 * **Bet Description Management**: 
-* Create, update, delete, and view details of bets in the system. This feature helps manage the lifecycle of betting events, including key information like bet names, expiration dates, and statuses. 
+  * Create, update, delete, and view details of bets in the system. This feature helps manage the lifecycle of betting events, including key information like bet names, expiration dates, and statuses.
+
 * **Bet Choice Management**: 
-* Handle various options for each bet, such as possible outcomes, along with their respective probabilities. This feature supports creating and managing different choices within a betting event. 
+  * Handle various options for each bet, such as possible outcomes, along with their respective probabilities. This feature supports creating and managing different choices within a betting event.
+
 * **Arbitrage Opportunities**: 
-* Identify and manage arbitrage opportunities across different betting platforms. The system helps store and monitor arbitrage possibilities, ensuring you can track profitable differences between odds. 
+  * Identify and manage arbitrage opportunities across different betting platforms. The system helps store and monitor arbitrage possibilities, ensuring you can track profitable differences between odds.
+
 * **Price Tracking**: 
-* Store and track the prices of different bet outcomes over time. This feature enables historical price tracking for better decision-making and future projections.
+  * Store and track the prices of different bet outcomes over time. This feature enables historical price tracking for better decision-making and future projections.
