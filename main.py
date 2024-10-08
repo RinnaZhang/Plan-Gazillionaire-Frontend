@@ -31,10 +31,10 @@ def create_connection():
 #create bet_description table
 def create_bet_description_table(connection):
     create_table_query = """
-    CREATE TABLE IF NOT EXISTS bet_descriptoin (
+    CREATE TABLE IF NOT EXISTS bet_description (
         bet_id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        experiation_date DATE,
+        name VARCHAR(255),
+        exp_date DATE,
         website VARCHAR(255),
         event_type SET('election', 'fed', 'crypto', 'intl_politics', 'financial'),
         status ENUM('open', 'closed'),
@@ -52,17 +52,18 @@ def create_bet_description_table(connection):
 #add a bet to the bet_description table
 def add_bet_description(connection):
     name = input("Enter bet name: ")
-    experation_date = input("Enter expiration date (YYYY-MM-DD): ")
+    exp_date = input("Enter expiration date (YYYY-MM-DD): ")
     website = input("Enter website name: ")
     event_type = input("Enter event_type (election/fed/crypto/intl_politics/financial): ")
     status = input("Enter bet status (open/closed): ")
     is_arbitrage = input("Enter if there were any arbitrage opportunities (yes/no): ")
     
     query = """
-    INSERT INTO bet_description (name, experation_date, website, event_type, status, is_arbitrage)
+    INSERT INTO bet_description (name, exp_date, website, event_type, status, is_arbitrage)
     VALUES (%s, %s, %s, %s, %s, %s)
     """
-    values = (name, experation_date, website, event_type, status, is_arbitrage)
+    
+    values = (name, exp_date, website, event_type, status, is_arbitrage)
     
     try:
         with connection.cursor() as cursor:
@@ -85,7 +86,7 @@ def view_bet_description(connection):
                 for bet in results:
                     print(f"\nID: {bet[0]}")
                     print(f"name: {bet[1]}")
-                    print(f"experation_date: {bet[2]}")
+                    print(f"exp_date: {bet[2]}")
                     print(f"website: {bet[3]}")
                     print(f"event_type: {bet[4]}")
                     print(f"status: ${bet[5]}")
@@ -96,10 +97,10 @@ def view_bet_description(connection):
 #update bets from bet_description table
 def update_bet_description(connection):
     bet_id = input("Enter the ID of the bet to update: ")
-    field = input("Enter the field to update (name/experation_date/website/event_type/status/is_arbitrage): ")
+    field = input("Enter the field to update (name/exp_date/website/event_type/status/is_arbitrage): ")
     value = input("Enter the new value: ")
     
-    query = f"UPDATE bet_description SET {field} = %s WHERE id = %s"
+    query = f"UPDATE bet_description SET {field} = %s WHERE bet_id = %s"
     values = (value, bet_id)
     
     try:
@@ -117,7 +118,7 @@ def update_bet_description(connection):
 def delete_bet_description(connection):
     bet_id = input("Enter the ID of the bet to delete: ")
     
-    query = "DELETE FROM bet_description WHERE id = %s"
+    query = "DELETE FROM bet_description WHERE bet_id = %s"
     value = (bet_id,)
     
     try:
@@ -148,20 +149,20 @@ while True:
     choice = input("Enter your choice (1-5): ")
         
     if choice == '1':
-            add_bet_description(connection)
+        add_bet_description(connection)
     elif choice == '2':
-            view_bet_description(connection)
+        view_bet_description(connection)
     elif choice == '3':
-            update_bet_description(connection)
+        update_bet_description(connection)
     elif choice == '4':
-            delete_bet_description(connection)
+        delete_bet_description(connection)
     elif choice == '5':
         break
     else:
         print("Invalid choice. Please try again.")
 
-    connection.close()
-    print("Connection Closed")
+connection.close()
+print("Connection Closed")
 
 #bet_choice table
 def create_bet_choice_table(connection):
