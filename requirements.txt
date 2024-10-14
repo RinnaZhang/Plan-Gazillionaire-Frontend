@@ -1,4 +1,5 @@
+fastapi
+uvicorn
+SQLAlchemy
 mysql-connector-python
 python-dotenv
-flask_sqlalchemy
-flask
