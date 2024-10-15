@@ -73,3 +73,74 @@ python main.py
 
 * **Price Tracking**: 
   * Store and track the prices of different bet outcomes over time. This feature enables historical price tracking for better decision-making and future projections.
+
+## API Documentation
+
+The user can access and retrieve data from the SQL DB using the API we built. It is a RESTful API built with FastAPI which allows the managing of bets and arbitrage opportunities.
+
+#### Bet Management
+
+- **Get All Bets**
+  - **GET** `/api/v1/bets`
+  - Returns a list of all bets.
+
+- **Get Bet by ID**
+  - **GET** `/api/v1/bets/{bet_id}`
+  - Fetches a specific bet by `bet_id`.
+
+- **Create New Bet**
+  - **POST** `/api/v1/bets`
+  - Creates a new bet with the following fields:
+    ```json
+    {
+      "name": "string",
+      "expiration_date": "YYYY-MM-DD",
+      "website": "optional_string",
+      "status": "optional_string",
+      "is_arbitrage": "optional_string"
+    }
+    ```
+
+- **Update Bet by ID**
+  - **PUT** `/api/v1/bets/{bet_id}`
+  - Updates an existing bet's information based on `bet_id`.
+
+- **Delete Bet by ID**
+  - **DELETE** `/api/v1/bets/{bet_id}`
+  - Deletes a bet from the system.
+
+#### Arbitrage Opportunities Management
+
+- **Get All Arbitrage Opportunities**
+  - **GET** `/api/v1/arbitrage`
+  - Fetches all arbitrage opportunities.
+
+- **Get Arbitrage Opportunity by ID**
+  - **GET** `/api/v1/arbitrage/{arb_id}`
+  - Retrieves a specific arbitrage opportunity by `arb_id`.
+
+- **Create New Arbitrage Opportunity**
+  - **POST** `/api/v1/arbitrage`
+  - Creates a new arbitrage opportunity between two bet options:
+    ```json
+    {
+      "bet_id1": "integer",
+      "bet_id2": "integer",
+      "timestamp": "YYYY-MM-DD",
+      "profit": "optional_float"
+    }
+    ```
+
+- **Update Arbitrage Opportunity by ID**
+  - **PUT** `/api/v1/arbitrage/{arb_id}`
+  - Updates an existing arbitrage opportunity by `arb_id`.
+
+- Delete Arbitrage Opportunity by ID
+  - **DELETE** `/api/v1/arbitrage/{arb_id}`
+  - Removes an arbitrage opportunity from the system.
+
+### Error Handling
+
+The API uses standard HTTP response codes to indicate success or failure:
+- **404 Not Found**: Resource not found.
+- **400 Bad Request**: Invalid input data.
