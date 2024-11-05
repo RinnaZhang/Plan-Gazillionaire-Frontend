@@ -1,6 +1,7 @@
 import React from 'react';
 import OpportunityDetails from './OpportunityDetails';
 import mockData from '../mockData'; 
+import '../index.css';
 
 function OpportunitiesList() {
   return (
@@ -8,7 +9,7 @@ function OpportunitiesList() {
       {mockData.map((opp) => (
         <div 
           key={opp.id}
-          className=" dark-bg p-4 rounded-lg shadow-md hover:shadow-neon-green-light transition duration-300 ease-in-out"
+          className=" dark-bg box-neon-green-light p-4 rounded-lg shadow-md transition duration-300 ease-in-out"
 
         >
           <OpportunityDetails opportunity={opp} />

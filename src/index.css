@@ -47,6 +47,7 @@ code {
   background-color: var(--box-color);
 }
 
-.hover\:neon-green-light:hover {
-  box-shadow: 0 0 15px var(--neon-green-light); /* Class for a glowing shadow effect on hover */
+.box-neon-green-light:hover {
+  box-shadow: 0 0 15px var(--neon-green-light);
 }
+
