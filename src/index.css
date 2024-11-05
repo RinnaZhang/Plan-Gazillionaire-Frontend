@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +14,39 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Custom CSS */
+:root {
+  --sky-blue: #14b5ff; /* Custom property for the blue color */
+  --dark-blue: #003366; /* Custom property for dark blue */
+  --dark-bg: #3063a5; /* Custom property for dark background */
+  --light-bg: #dde9f0;
+  --text-color: #ffffff;
+  --neon-green-light: #28cab7;
+  --box-color: #85abcf;
+}
+
+.text-color {
+  color: var(--text-color);
+}
+
+.light-bg {
+  background-color: var(--light-bg);
+}
+
+.dark-bg {
+  background-color: var(--dark-bg);
+}
+
+.header-color {
+  color: var(--dark-blue);
+}
+
+.box-color {
+  background-color: var(--box-color);
+}
+
+.hover\:neon-green-light:hover {
+  box-shadow: 0 0 15px var(--neon-green-light); /* Class for a glowing shadow effect on hover */
 }

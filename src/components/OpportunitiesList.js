@@ -4,9 +4,15 @@ import mockData from '../mockData';
 
 function OpportunitiesList() {
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {mockData.map((opp) => (
-        <OpportunityDetails key={opp.id} opportunity={opp} />
+        <div 
+          key={opp.id}
+          className=" dark-bg p-4 rounded-lg shadow-md hover:shadow-neon-green-light transition duration-300 ease-in-out"
+
+        >
+          <OpportunityDetails opportunity={opp} />
+        </div>
       ))}
     </div>
   );
