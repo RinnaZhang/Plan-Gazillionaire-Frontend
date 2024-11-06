@@ -8,7 +8,7 @@ const mockData = [
   },
   {
     id: 2,
-    title: 'Premier League 2023 Final',
+    title: 'UEFA Champions League 2025 Final',
     bet1: 'Team X scores first goal',
     bet2: 'Team Y wins in the last 10 minutes',
     profit: '$350',
