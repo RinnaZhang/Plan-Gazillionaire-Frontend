@@ -1,10 +1,16 @@
-Here's how you can structure your instructions in a `README.md` format:
+# PoliBets
 
-```markdown
-# Project Name
+Your gateway to smart betting and arbitrage opportunities.
 
 ## Description
-Brief description of the web app. Include what the app does and any important information users need to know.
+PoliBets is a web application designed to help users explore and track smart betting strategies and arbitrage opportunities. With a focus on data-driven insights, the app enables users to maximize their betting potential through a user-friendly and organized interface. The app provides categories, timeframes, and profitability thresholds to refine search results, offering detailed insights into various events, including elections, economic summits, etc.
+
+**Important Note**: Currently, the search bar and the three buttons (Categories, Timeframe, and Profitability Threshold) serve as placeholders and are not functional. These will be implemented to work with real data in future updates, replacing the mock data currently displayed.
+
+## Features
+* View specific betting events and associated bets for potential arbitrage opportunities!
+* Search and filter bets by categories, timeframes, and profitability thresholds (coming soon...). 
+* Access insights into profitability across different market sectors and events (coming soon...).
 
 ## Installation and Launch Instructions
 
@@ -12,23 +18,21 @@ Follow these steps to clone and run the web app on your local machine.
 
 ### Prerequisites
 - **Node.js**: Ensure that Node.js is installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
-- **Git**: Ensure Git is installed for cloning the repository. Download it from [git-scm.com](https://git-scm.com/).
 
 ### Steps to Launch
 
 1. **Clone the Repository**
    Open your terminal or command prompt and run the following command:
    ```bash
-   git clone <https://github.com/RinnaZhang/Plan-Gazillionaire-Frontend.git>
+   git clone https://github.com/RinnaZhang/Plan-Gazillionaire-Frontend
    ```
 
 2. **Navigate to the Project Directory**
    Change into the project directory:
    ```bash
-   cd <project-folder-name>
+   cd Plan-Gazillionaire-Frontend
    ```
-   Replace `<project-folder-name>` with the name of the cloned project folder.
-
+   
 3. **Install Dependencies**
    Install the project dependencies by running:
    ```bash
@@ -47,14 +51,3 @@ Follow these steps to clone and run the web app on your local machine.
    http://localhost:3000
    ```
    The web app should now be running locally on your machine.
-
-### Troubleshooting
-- If you encounter any issues with missing dependencies or errors, make sure that Node.js and npm are up to date.
-- Run `npm audit fix` or `npm install` again if you face dependency warnings.
-
-### Additional Notes
-- For production builds, use:
-  ```bash
-  npm run build
-  ```
-  This will create an optimized build in the `build` directory.
