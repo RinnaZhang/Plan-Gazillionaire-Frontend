@@ -4,7 +4,7 @@ import '../index.css';
 import axios from 'axios';
 
 function OpportunitiesList() {
-  const [opportunites, setOpportunites] = useState([]);
+  const [opportunities, setOpportunities] = useState([]);
   const [selectedOpportunity, setSelectedOpportunity] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
