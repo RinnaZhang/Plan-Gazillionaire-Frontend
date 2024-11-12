@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import './index.css';
 import Description from './components/Description';
 import SearchBar from './components/SearchBar';
