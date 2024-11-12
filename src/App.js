@@ -3,7 +3,6 @@ import './App.css';
 import './index.css';
 import Description from './components/Description';
 import SearchBar from './components/SearchBar';
-import FilterOptions from './components/FilterOptions';
 import OpportunitiesList from './components/OpportunitiesList';
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
       </header>
       <main className="space-y-8">
         <SearchBar />
-        <FilterOptions />
         <Description />
         <OpportunitiesList />
       </main>

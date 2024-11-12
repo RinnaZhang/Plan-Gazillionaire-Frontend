@@ -25,6 +25,11 @@ function OpportunitiesList() {
 
   // fetch details of a specific opportunity by ID (user-selected)
   const fetchOpportunityDetails = async (arb_id) => {
+    if (!arb_id) {
+      setError('Invalid opportunity ID');
+      return;
+    }
+
     setLoading(true);
     setError(null);
     try {
@@ -43,18 +48,26 @@ function OpportunitiesList() {
 
   return (
     <div>
-      <h2>Arbitrage Opportunities</h2>
+      <h2>&nbsp;</h2>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {opportunities.map((opp) => (
+        {opportunities.map((opp, index) => (
           <div 
-            key={opp.id} // Ensure this matches the actual ID field returned by your API
-            onClick={() => fetchOpportunityDetails(opp.id)} // Load details when clicked
+            key={opp.arb_id}  // Ensure the key is unique
             className="dark-bg box-neon-green-light p-4 rounded-lg shadow-md transition duration-300 ease-in-out cursor-pointer"
           >
-            <OpportunityDetails opportunity={opp} />
+            {/* Display only a brief summary here */}
+            <h3 className="text-xl font-bold">Arbitrage Opportunity {index + 1}</h3>
+            <p>Expected Profit: ${opp.profit}</p>
+            {/* Add the "See Details" button here */}
+            <button 
+              onClick={() => fetchOpportunityDetails(opp.arb_id)} 
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              See Details
+            </button>
           </div>
         ))}
       </div>
@@ -64,7 +77,12 @@ function OpportunitiesList() {
         <div className="modal-overlay">
           <div className="modal-content dark-bg p-4 rounded-lg shadow-md">
             <OpportunityDetails opportunity={selectedOpportunity} />
-            <button onClick={() => setSelectedOpportunity(null)} className="close-button">Close</button>
+            <button 
+              onClick={() => setSelectedOpportunity(null)} 
+              className="close-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
