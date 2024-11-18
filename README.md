@@ -5,12 +5,11 @@ Your gateway to smart betting and arbitrage opportunities.
 ## Description
 PoliBets is a web application designed to help users explore and track smart betting strategies and arbitrage opportunities. With a focus on data-driven insights, the app enables users to maximize their betting potential through a user-friendly and organized interface. The app provides categories, timeframes, and profitability thresholds to refine search results, offering detailed insights into various events, including elections, economic summits, etc.
 
-**Important Note**: Currently, when you click on the "See details" button, you need to scroll down slightly to the end of our opportunities list to see details. We are still working on fixing this and will provide an update here once everything is perfectly aligned...
+**Important Note**: Currently, when you click on the "See details" button, the Bet ID is not showing properly (We are working hard to fix this and we will keep you posted!!) 
 
 ## Features
 * View specific betting events and associated bets for potential arbitrage opportunities!
 * Search and filter bets by categories, timeframes, and profitability thresholds (coming soon...). 
-* Access insights into profitability across different market sectors and events (coming soon...).
 
 ## Installation and Launch Instructions
 
