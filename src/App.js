@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import './index.css';
 import Description from './components/Description';
-import SearchBar from './components/SearchBar';
 import OpportunitiesList from './components/OpportunitiesList';
 
 function App() {
@@ -13,7 +12,6 @@ function App() {
         <p className="header-color">Your gateway to smart betting and arbitrage opportunities</p>
       </header>
       <main className="space-y-8">
-        <SearchBar />
         <Description />
         <OpportunitiesList />
       </main>

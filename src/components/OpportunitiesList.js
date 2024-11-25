@@ -52,12 +52,13 @@ const OpportunitiesList = () => {
   const fetchOpportunityDetails = async (arb_id) => {
     try {
       const response = await axios.get(`http://localhost:9000/api/v1/arbitrage/${arb_id}`);
-      setSelectedOpportunity(response.data);
+      console.log("Fetched Opportunity Details:", response.data);
+      setSelectedOpportunity(response.data); // Ensure data is passed directly
     } catch (error) {
       console.error("Error fetching opportunity details:", error);
       setError("Failed to fetch opportunity details.");
     }
-  };
+  };  
 
   return (
     <div>
@@ -88,12 +89,13 @@ const OpportunitiesList = () => {
 
       {selectedOpportunity && (
         <div className="modal-overlay">
+          {console.log("Selected Opportunity Data:", selectedOpportunity)}
           <div className="modal-content dark-bg p-4 rounded-lg shadow-md">
             <h3>Details for Arbitrage Opportunity</h3>
-            <p>Bet 1: {selectedOpportunity.bet1Description}</p>
-            <p>Bet 2: {selectedOpportunity.bet2Description}</p>
-            <p>Profit: ${selectedOpportunity.profit.toFixed(2)}</p>
-            <p>Timestamp: {new Date(selectedOpportunity.timestamp).toLocaleString()}</p>
+            <p>Bet 1: {selectedOpportunity.bet1Description || "N/A"}</p>
+            <p>Bet 2: {selectedOpportunity.bet2Description || "N/A"}</p>
+            <p>Profit: ${selectedOpportunity.profit.toFixed(2) || "N/A"}</p>
+            <p>Timestamp: {selectedOpportunity.timestamp ? new Date(selectedOpportunity.timestamp).toLocaleString() : "N/A"}</p>
             <button
               onClick={() => setSelectedOpportunity(null)}
               className="close-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
