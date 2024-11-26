@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css';
 import axios from 'axios';
+import OpportunityDetails from './OpportunityDetails';
 
 const OpportunitiesList = () => {
   const [opportunities, setOpportunities] = useState([]);
@@ -18,25 +19,7 @@ const OpportunitiesList = () => {
         const response = await axios.get("http://localhost:9000/api/v1/arbitrage");
         const opportunitiesData = response.data;
 
-        // Fetch bet descriptions for each opportunity
-        const enrichedOpportunities = await Promise.all(
-          opportunitiesData.map(async (opportunity) => {
-            const bet1Response = await axios.get(
-              `http://localhost:9000/api/v1/bets/${opportunity.bet_id1}`
-            );
-            const bet2Response = await axios.get(
-              `http://localhost:9000/api/v1/bets/${opportunity.bet_id2}`
-            );
-
-            return {
-              ...opportunity,
-              bet1Description: bet1Response.data.name,
-              bet2Description: bet2Response.data.name,
-            };
-          })
-        );
-
-        setOpportunities(enrichedOpportunities);
+        setOpportunities(opportunitiesData);
       } catch (error) {
         console.error("Error fetching arbitrage opportunities:", error);
         setError("Failed to fetch opportunities.");
@@ -51,14 +34,17 @@ const OpportunitiesList = () => {
   // Fetch details of a specific arbitrage opportunity
   const fetchOpportunityDetails = async (arb_id) => {
     try {
+      setLoading(true); // Set loading while fetching the specific opportunity
       const response = await axios.get(`http://localhost:9000/api/v1/arbitrage/${arb_id}`);
       console.log("Fetched Opportunity Details:", response.data);
-      setSelectedOpportunity(response.data); // Ensure data is passed directly
+      setSelectedOpportunity(response.data);
     } catch (error) {
       console.error("Error fetching opportunity details:", error);
       setError("Failed to fetch opportunity details.");
+    } finally {
+      setLoading(false);
     }
-  };  
+  };
 
   return (
     <div>
@@ -73,9 +59,7 @@ const OpportunitiesList = () => {
             className="dark-bg box-neon-green-light p-4 rounded-lg shadow-md transition duration-300 ease-in-out cursor-pointer"
           >
             <h3 className="text-xl font-bold">Arbitrage Opportunity {index + 1}</h3>
-            <p>Bet 1: {opp.bet1Description}</p>
-            <p>Bet 2: {opp.bet2Description}</p>
-            <p>Expected Profit: ${opp.profit}</p>
+            <p>{opp.bet_description_1} / {opp.bet_description_2}</p>
 
             <button
               onClick={() => fetchOpportunityDetails(opp.arb_id)}
@@ -83,30 +67,39 @@ const OpportunitiesList = () => {
             >
               See Details
             </button>
-          </div>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>
+
 
       {selectedOpportunity && (
         <div className="modal-overlay">
           {console.log("Selected Opportunity Data:", selectedOpportunity)}
-          <div className="modal-content dark-bg p-4 rounded-lg shadow-md">
-            <h3>Details for Arbitrage Opportunity</h3>
-            <p>Bet 1: {selectedOpportunity.bet1Description || "N/A"}</p>
-            <p>Bet 2: {selectedOpportunity.bet2Description || "N/A"}</p>
-            <p>Profit: ${selectedOpportunity.profit.toFixed(2) || "N/A"}</p>
-            <p>Timestamp: {selectedOpportunity.timestamp ? new Date(selectedOpportunity.timestamp).toLocaleString() : "N/A"}</p>
-            <button
-              onClick={() => setSelectedOpportunity(null)}
-              className="close-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Close
-            </button>
-          </div>
+          <div className="modal-content">
+            <div className="modal-header">Details for Arbitrage Opportunity</div>
+            <div className="modal-details">
+              <p><strong>Bet 1:</strong> {selectedOpportunity.bet_description_1} ({selectedOpportunity.website_1})</p>
+              <p><strong>Bet Side 1:</strong> {selectedOpportunity.bet_side_1}</p>
+              <hr style={{ margin: '10px 0' }} />
+              <p><strong>Bet 2:</strong> {selectedOpportunity.bet_description_2} ({selectedOpportunity.website_2})</p>
+              <p><strong>Bet Side 2:</strong> {selectedOpportunity.bet_side_2}</p>
+              <hr style={{ margin: '10px 0' }} />
+              <p><strong>Profit:</strong> ${selectedOpportunity.profit.toFixed(2)}</p>
+              <p><strong>Timestamp:</strong> {selectedOpportunity.timestamp ? new Date(selectedOpportunity.timestamp).toLocaleString() : "N/A"}</p>
         </div>
-      )}
+        <button
+          onClick={() => setSelectedOpportunity(null)}
+          className="close-button"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  )}
+
     </div>
   );
 };
 
 export default OpportunitiesList;
+
