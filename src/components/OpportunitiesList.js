@@ -11,26 +11,25 @@ const OpportunitiesList = () => {
   const [sortOption, setSortOption] = useState("highest"); // Default sorting option
   const [searchTerm, setSearchTerm] = useState(""); // Search term
 
-  // Fetch opportunities from the backend
   useEffect(() => {
     const fetchOpportunities = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/api/v1/arbitrage`
-        );                
+        const response = await axios.get('https://plan-gazillionaire-872939346033.us-central1.run.app/api/v1/arbitrage');            
+        console.log("Fetched opportunities response:", response); // Add this line
         // Sort opportunities by profit in descending order initially
         const sortedOpportunities = response.data.sort((a, b) => b.profit - a.profit);
         setOpportunities(sortedOpportunities);
         setFilteredOpportunities(sortedOpportunities);
       } catch (err) {
+        console.error("Error fetching opportunities:", err); // Add this line
         setError("Failed to fetch opportunities.");
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchOpportunities();
   }, []);
 
