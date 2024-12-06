@@ -167,3 +167,46 @@ p, ul {
 .close-button:hover {
   background: #e11d48;
 }
+
+/* Testimonials Section */
+.testimonials-section {
+  padding: 3.5rem 2.5rem;
+  background-color: #0E1A2B;
+  color: white;
+}
+
+.testimonials-example {
+  background-color: #162639;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.testimonials-images-container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem; /* Increase spacing between images */
+  margin-top: 2rem;
+}
+
+.testimonials-image {
+  max-width: 550px; /* Increase the maximum width */
+  width: 100%; /* Make it responsive */
+  border-radius: 8px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonials-image:hover {
+  transform: scale(1.1); /* Slightly larger hover effect */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Add styles to ensure consistent design */
+.text-blue-400 {
+  color: #60a5fa; /* Light blue */
+}
+
+.text-white {
+  color: #ffffff;
+}
