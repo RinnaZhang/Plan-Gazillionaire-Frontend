@@ -17,7 +17,9 @@ const OpportunitiesList = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get("http://localhost:9000/api/v1/arbitrage");
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/api/v1/arbitrage`
+        );                
         // Sort opportunities by profit in descending order initially
         const sortedOpportunities = response.data.sort((a, b) => b.profit - a.profit);
         setOpportunities(sortedOpportunities);
