@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../index.css";
 import axios from "axios";
+import OpportunityDetails from "./OpportunityDetails"; // Import the OpportunityDetails component
 
 const OpportunitiesList = () => {
   const [opportunities, setOpportunities] = useState([]);
@@ -61,7 +62,7 @@ const OpportunitiesList = () => {
 
   return (
     <section className="px-10 bg-[#0E1A2B] pb-10">
-      <h2 className="text-3xl font-bold text-center text-white mb-6">
+      <h2 className="text-3xl text-center text-white mb-6">
         Arbitrage Opportunities
       </h2>
       {loading && <p className="text-white text-center">Loading...</p>}
@@ -69,7 +70,6 @@ const OpportunitiesList = () => {
 
       {/* Search and Sorting */}
       <div className="flex justify-center mb-6 gap-4">
-        {/* Search Bar */}
         <input
           type="text"
           placeholder="Search opportunities..."
@@ -78,7 +78,6 @@ const OpportunitiesList = () => {
           className="border border-gray-300 rounded px-3 py-2 w-64"
         />
 
-        {/* Sorting Dropdown */}
         <div>
           <label htmlFor="sort" className="text-white mr-4">
             Sort by:
@@ -136,31 +135,8 @@ const OpportunitiesList = () => {
       {selectedOpportunity && (
         <div className="modal-overlay" onClick={() => setSelectedOpportunity(null)}>
           <div className="modal-content">
-            <h3 className="modal-header">Details for Arbitrage Opportunity</h3>
-            <div className="modal-details">
-              <p>
-                <strong>Bet 1:</strong> {selectedOpportunity.bet_description_1} (
-                {selectedOpportunity.website_1})
-              </p>
-              <p>
-                <strong>Bet Side 1:</strong> {selectedOpportunity.bet_side_1}
-              </p>
-              <hr className="my-2" />
-              <p>
-                <strong>Bet 2:</strong> {selectedOpportunity.bet_description_2} (
-                {selectedOpportunity.website_2})
-              </p>
-              <p>
-                <strong>Bet Side 2:</strong> {selectedOpportunity.bet_side_2}
-              </p>
-              <p className="text-pink-400 font-bold">
-                Profit: ${selectedOpportunity.profit.toFixed(2)}
-              </p>
-              <p>
-                <strong>Timestamp:</strong>{" "}
-                {new Date(selectedOpportunity.timestamp).toLocaleString()}
-              </p>
-            </div>
+            {/* Use OpportunityDetails component here */}
+            <OpportunityDetails opportunity={selectedOpportunity} />
             <button className="close-button">Close</button>
           </div>
         </div>

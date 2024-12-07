@@ -1,5 +1,4 @@
-import React from 'react';
-import '../index.css';
+import React from "react";
 
 function OpportunityDetails({ opportunity }) {
   if (!opportunity) {
@@ -7,14 +6,53 @@ function OpportunityDetails({ opportunity }) {
   }
 
   return (
-    <div className="box-color box-neon-green-light p-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-      <h3 className="text-2xl header-color font-semibold mb-2">Details for Arbitrage Opportunity</h3>
-      <p className="text-dark-blue mb-1"><strong>Bet 1:</strong> {opportunity.bet_description_1} ({opportunity.website_1})</p>
-      <p className="text-dark-blue mb-1"><strong>Bet Side 1:</strong> {opportunity.bet_side_1}</p>
-      <p className="text-dark-blue mb-1"><strong>Bet 2:</strong> {opportunity.bet_description_2} ({opportunity.website_2})</p>
-      <p className="text-dark-blue mb-1"><strong>Bet Side 2:</strong> {opportunity.bet_side_2}</p>
-      <p className="text-dark-blue"><strong>Profit:</strong> ${opportunity.profit.toFixed(2)}</p>
-      <p className="text-dark-blue"><strong>Timestamp:</strong> {opportunity.timestamp ? new Date(opportunity.timestamp).toLocaleString() : "N/A"}</p>
+    <div className="p-6 bg-[#162639] text-white rounded-lg shadow-md max-w-lg">
+      <div className="mb-4">
+        <h4 className="text-lg font-bold mb-2 bebas-neue-regular text-center">
+          BET 1
+        </h4>
+        <p className="mb-1">
+          <strong>Event:</strong> {opportunity.bet_description_1}
+        </p>
+        <p className="mb-1">
+          <strong>Platform:</strong> {opportunity.website_1}
+        </p>
+        <p>
+          <strong>Side:</strong> {opportunity.bet_side_1}
+        </p>
+      </div>
+
+      <hr className="border-gray-600 my-4" />
+
+      <div className="mb-4">
+        <h4 className="text-lg font-bold mb-2 bebas-neue-regular text-center">
+          BET 2
+        </h4>
+        <p className="mb-1">
+          <strong>Event:</strong> {opportunity.bet_description_2}
+        </p>
+        <p className="mb-1">
+          <strong>Platform:</strong> {opportunity.website_2}
+        </p>
+        <p>
+          <strong>Side:</strong> {opportunity.bet_side_2}
+        </p>
+      </div>
+
+      <hr className="border-gray-600 my-4" />
+
+      <div className="flex justify-center items-center mb-4">
+        <p className="font-bold text-pink-400">
+          Profit: ${opportunity.profit.toFixed(2)}
+        </p>
+      </div>
+
+      <p className="text-sm text-gray-300 text-center">
+        <strong>Timestamp:</strong>{" "}
+        {opportunity.timestamp
+          ? new Date(opportunity.timestamp).toLocaleString()
+          : "N/A"}
+      </p>
     </div>
   );
 }
