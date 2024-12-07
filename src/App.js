@@ -4,21 +4,18 @@ import "./index.css";
 import OpportunitiesList from "./components/OpportunitiesList";
 import HowArbitrageWorks from "./components/HowArbitrageWorks";
 import Testimonials from "./components/Testimonials";
+import HeroSection from "./components/HeroSection";
 
 function App() {
   return (
     <div className="App">
-      {/* Hero / Header Section */}
-      <header className="bg-[#0E1A2B] text-center py-20">
-        <h1 className="text-5xl font-bold text-white mb-4">PoliBets</h1>
-        <p className="text-blue-400 text-xl">
-          Your gateway to smart betting and arbitrage opportunities
-        </p>
-      </header>
+      {/* Full-Page Hero Section */}
+      <HeroSection />
 
       <main>
         {/* Arbitrage Opportunities Section */}
-        <section className="section-spacing">
+        {/* Adding an id here so the hero arrow can scroll directly to it */}
+        <section id="opportunities" className="section-spacing">
           <OpportunitiesList />
         </section>
 
