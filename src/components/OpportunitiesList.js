@@ -4,65 +4,66 @@ import axios from "axios";
 
 const OpportunitiesList = () => {
   const [opportunities, setOpportunities] = useState([]);
-  const [filteredOpportunities, setFilteredOpportunities] = useState([]); // For search filtering
+  const [filteredOpportunities, setFilteredOpportunities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedOpportunity, setSelectedOpportunity] = useState(null);
-  const [sortOption, setSortOption] = useState("highest"); // Default sorting option
-  const [searchTerm, setSearchTerm] = useState(""); // Search term
+  const [sortOption, setSortOption] = useState("highest");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchOpportunities = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get('https://plan-gazillionaire-872939346033.us-central1.run.app/api/v1/arbitrage');            
-        console.log("Fetched opportunities response:", response); // Add this line
-        // Sort opportunities by profit in descending order initially
+        const response = await axios.get(
+          "https://plan-gazillionaire-872939346033.us-central1.run.app/api/v1/arbitrage"
+        );
         const sortedOpportunities = response.data.sort((a, b) => b.profit - a.profit);
         setOpportunities(sortedOpportunities);
         setFilteredOpportunities(sortedOpportunities);
       } catch (err) {
-        console.error("Error fetching opportunities:", err); // Add this line
+        console.error("Error fetching opportunities:", err);
         setError("Failed to fetch opportunities.");
       } finally {
         setLoading(false);
       }
     };
-  
+
     fetchOpportunities();
   }, []);
 
-  // Sorting logic
   const sortOpportunities = (opps) => {
     let sorted = [...opps];
     if (sortOption === "lowest") {
-      sorted = sorted.sort((a, b) => a.profit - b.profit);
+      sorted.sort((a, b) => a.profit - b.profit);
     } else if (sortOption === "highest") {
-      sorted = sorted.sort((a, b) => b.profit - a.profit);
+      sorted.sort((a, b) => b.profit - a.profit);
     } else if (sortOption === "alphabetical") {
-      sorted = sorted.sort((a, b) => a.bet_description_1.localeCompare(b.bet_description_1));
+      sorted.sort((a, b) =>
+        a.bet_description_1.localeCompare(b.bet_description_1)
+      );
     }
     return sorted;
   };
 
-  // Search logic
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     const filtered = opportunities.filter((opp) =>
       opp.bet_description_1.toLowerCase().includes(e.target.value.toLowerCase())
     );
-    setFilteredOpportunities(sortOpportunities(filtered)); // Apply sorting to search results
+    setFilteredOpportunities(sortOpportunities(filtered));
   };
 
-  // Sorting on change of sortOption
   useEffect(() => {
     setFilteredOpportunities(sortOpportunities(filteredOpportunities));
   }, [sortOption]);
 
   return (
-    <section className="py-14 px-10 bg-[#0E1A2B]">
-      <h2 className="text-3xl font-bold text-center text-white mb-10">Arbitrage Opportunities</h2>
+    <section className="px-10 bg-[#0E1A2B] pb-10">
+      <h2 className="text-3xl font-bold text-center text-white mb-6">
+        Arbitrage Opportunities
+      </h2>
       {loading && <p className="text-white text-center">Loading...</p>}
       {error && <p className="text-red-400 text-center">{error}</p>}
 
@@ -79,7 +80,9 @@ const OpportunitiesList = () => {
 
         {/* Sorting Dropdown */}
         <div>
-          <label htmlFor="sort" className="text-white mr-4">Sort by:</label>
+          <label htmlFor="sort" className="text-white mr-4">
+            Sort by:
+          </label>
           <select
             id="sort"
             value={sortOption}
@@ -93,31 +96,40 @@ const OpportunitiesList = () => {
         </div>
       </div>
 
-      {/* Opportunities List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredOpportunities.map((opp) => (
-          <div
-            key={opp.arb_id}
-            className="card cursor-pointer"
-            onClick={() => setSelectedOpportunity(opp)}
-          >
-            {/* Event Title */}
-            <h3 className="text-xl font-bold text-blue-400">{opp.bet_description_1}</h3>
-
-            {/* Profit Information */}
-            <p className="mt-2 text-pink-400 text-lg font-semibold">
-              Potential Profit: ${opp.profit.toFixed(2)}
-            </p>
-
-            {/* Platform Names */}
-            <p className="text-gray-300 text-sm">
-              {opp.website_1} ↔ {opp.website_2}
-            </p>
-
-            {/* See Details Button */}
-            <button className="button mt-4 block mx-auto">See Details</button>
-          </div>
-        ))}
+      {/* Table Layout for Opportunities */}
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-white">
+          <thead>
+            <tr className="bg-[#162639]">
+              <th className="py-3 px-4 font-bold text-left">Event</th>
+              <th className="py-3 px-4 font-bold text-left">Potential Profit</th>
+              <th className="py-3 px-4 font-bold text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredOpportunities.map((opp) => (
+              <tr
+                key={opp.arb_id}
+                className="border-b border-gray-700 hover:bg-[#1D2E47] transition-colors"
+              >
+                <td className="py-3 px-4 text-blue-400 font-medium text-left">
+                  {opp.bet_description_1}
+                </td>
+                <td className="py-3 px-4 text-pink-400 font-semibold text-left">
+                  ${opp.profit.toFixed(2)}
+                </td>
+                <td className="py-3 px-4 text-center">
+                  <button
+                    className="button"
+                    onClick={() => setSelectedOpportunity(opp)}
+                  >
+                    See Details
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Modal for selected opportunity */}
