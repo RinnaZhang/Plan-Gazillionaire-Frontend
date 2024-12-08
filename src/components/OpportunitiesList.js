@@ -155,7 +155,7 @@ const OpportunitiesList = () => {
 
       {/* Modal */}
       {selectedOpportunity && (
-        <div className="modal-overlay" onClick={() => setSelectedOpportunity(null)}>
+        <div className="modal-overlay">
           <div className="modal-content">
             <h3 className="modal-header">Details for Arbitrage Opportunity</h3>
             <div className="modal-details">
