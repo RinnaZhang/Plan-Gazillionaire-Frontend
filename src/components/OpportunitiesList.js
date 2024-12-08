@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../index.css";
 import axios from "axios";
-import OpportunityDetails from "./OpportunityDetails"; // Import the OpportunityDetails component
 
 const OpportunitiesList = () => {
   const [opportunities, setOpportunities] = useState([]);
@@ -16,11 +15,35 @@ const OpportunitiesList = () => {
     const fetchOpportunities = async () => {
       setLoading(true);
       setError(null);
+
       try {
-        const response = await axios.get(
+        // Fetch arbitrage opportunities
+        const arbitrageResponse = await axios.get(
           "https://plan-gazillionaire-872939346033.us-central1.run.app/api/v1/arbitrage"
         );
-        const sortedOpportunities = response.data.sort((a, b) => b.profit - a.profit);
+
+        // Fetch bets with URLs
+        const betsResponse = await axios.get(
+          "https://plan-gazillionaire-872939346033.us-central1.run.app/api/v1/bets"
+        );
+
+        // Create a map of bet_id to bet_url
+        const betUrlMap = betsResponse.data.reduce((map, bet) => {
+          map[bet.bet_id] = bet.bet_url;
+          return map;
+        }, {});
+
+        // Merge bet_url into arbitrage opportunities
+        const mergedOpportunities = arbitrageResponse.data.map((opp) => ({
+          ...opp,
+          bet_url: betUrlMap[opp.bet_id] || null,
+        }));
+
+        // Sort the opportunities
+        const sortedOpportunities = mergedOpportunities.sort(
+          (a, b) => b.profit - a.profit
+        );
+
         setOpportunities(sortedOpportunities);
         setFilteredOpportunities(sortedOpportunities);
       } catch (err) {
@@ -62,7 +85,7 @@ const OpportunitiesList = () => {
 
   return (
     <section className="px-10 bg-[#0E1A2B] pb-10">
-      <h2 className="text-3xl text-center text-white mb-6">
+      <h2 className="text-3xl font-bold text-center text-white mb-6">
         Arbitrage Opportunities
       </h2>
       {loading && <p className="text-white text-center">Loading...</p>}
@@ -77,7 +100,6 @@ const OpportunitiesList = () => {
           onChange={handleSearch}
           className="border border-gray-300 rounded px-3 py-2 w-64"
         />
-
         <div>
           <label htmlFor="sort" className="text-white mr-4">
             Sort by:
@@ -95,7 +117,7 @@ const OpportunitiesList = () => {
         </div>
       </div>
 
-      {/* Table Layout for Opportunities */}
+      {/* Table */}
       <div className="overflow-x-auto">
         <table className="min-w-full text-white">
           <thead>
@@ -131,13 +153,58 @@ const OpportunitiesList = () => {
         </table>
       </div>
 
-      {/* Modal for selected opportunity */}
+      {/* Modal */}
       {selectedOpportunity && (
         <div className="modal-overlay" onClick={() => setSelectedOpportunity(null)}>
           <div className="modal-content">
-            {/* Use OpportunityDetails component here */}
-            <OpportunityDetails opportunity={selectedOpportunity} />
-            <button className="close-button">Close</button>
+            <h3 className="modal-header">Details for Arbitrage Opportunity</h3>
+            <div className="modal-details">
+              <p>
+                <strong>Bet 1:</strong> {selectedOpportunity.bet_description_1} (
+                {selectedOpportunity.website_1})
+              </p>
+              <p>
+                <strong>Bet Side 1:</strong> {selectedOpportunity.bet_side_1}
+              </p>
+              <hr className="my-2" />
+              <p>
+                <strong>Bet 2:</strong> {selectedOpportunity.bet_description_2} (
+                {selectedOpportunity.website_2})
+              </p>
+              <p>
+                <strong>Bet Side 2:</strong> {selectedOpportunity.bet_side_2}
+              </p>
+              <p className="text-pink-400 font-bold">
+                Profit: ${selectedOpportunity.profit.toFixed(2)}
+              </p>
+              {selectedOpportunity.bet_url ? (
+                <p>
+                  <strong>Bet URL:</strong>{" "}
+                  <a
+                    href={selectedOpportunity.bet_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-300 underline"
+                  >
+                    View Bet
+                  </a>
+                </p>
+              ) : (
+                <p>
+                  <strong>Bet URL:</strong> N/A
+                </p>
+              )}
+              <p>
+                <strong>Timestamp:</strong>{" "}
+                {new Date(selectedOpportunity.timestamp).toLocaleString()}
+              </p>
+            </div>
+            <button
+              className="close-button"
+              onClick={() => setSelectedOpportunity(null)}
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
