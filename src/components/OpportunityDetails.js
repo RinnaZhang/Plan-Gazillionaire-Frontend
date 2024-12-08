@@ -42,7 +42,7 @@ function OpportunityDetails({ opportunity }) {
       <hr className="border-gray-600 my-4" />
 
       <div className="flex justify-center items-center mb-4">
-        <p className="font-bold text-pink-400">
+        <p className="font-bold text-green-400">
           Profit: ${opportunity.profit.toFixed(2)}
         </p>
       </div>

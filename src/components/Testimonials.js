@@ -10,13 +10,13 @@ function Testimonials() {
         TESTIMONIALS
       </h2>
       <div className="testimonial-example bg-[#162639] p-6 rounded-lg shadow-md text-white">
-        <h3 className="text-2xl font-semibold text-pink-400 mb-4 bebas-neue-regular">
+        <h3 className="text-2xl font-semibold text-white-400 mb-4 bebas-neue-regular">
           Example: Will Trump End the Department of Education?
         </h3>
         <p>
           The developer team identified an arbitrage opportunity by betting on{" "}
-          <span className="text-blue-400">"Yes"</span> at Polymarket ($13) and{" "}
-          <span className="text-pink-400">"No"</span> at Kalshi ($61). Combined,
+          <span className="text-green-400">"Yes"</span> at Polymarket ($13) and{" "}
+          <span className="text-red-400">"No"</span> at Kalshi ($61). Combined,
           the total cost of betting was $74, guaranteeing a return of $100.
         </p>
         <p className="text-blue-400 mt-4 font-bold">

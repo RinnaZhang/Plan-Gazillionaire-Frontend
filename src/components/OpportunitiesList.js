@@ -114,7 +114,7 @@ const OpportunitiesList = () => {
                 <td className="py-3 px-4 text-blue-400 font-medium text-left">
                   {opp.bet_description_1}
                 </td>
-                <td className="py-3 px-4 text-pink-400 font-semibold text-left">
+                <td className="py-3 px-4 text-green-400 font-semibold text-left">
                   ${opp.profit.toFixed(2)}
                 </td>
                 <td className="py-3 px-4 text-center">

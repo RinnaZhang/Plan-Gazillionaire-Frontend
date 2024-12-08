@@ -16,15 +16,15 @@ function HowArbitrageWorks() {
           </p>
           <ul className="list-disc mt-4 ml-5">
             <li>
-              On Kalshi, "No" is priced at <span className="text-blue-400">60¢</span>.
+              On Kalshi, "No" is priced at <span className="text-pink-400">60¢</span>.
             </li>
             <li>
-              On Polymarket, "Yes" is priced at <span className="text-pink-400">20¢</span>.
+              On Polymarket, "Yes" is priced at <span className="text-blue-400">20¢</span>.
             </li>
           </ul>
           <p className="mt-6">
-            You can bet <span className="text-blue-400">$60</span> on "No" at
-            Kalshi and <span className="text-pink-400">$20</span> on "Yes" at
+            You can bet <span className="text-pink-400">$60</span> on "No" at
+            Kalshi and <span className="text-blue-400">$20</span> on "Yes" at
             Polymarket. Regardless of the outcome, your total payout will be
             $100.
           </p>
@@ -36,12 +36,12 @@ function HowArbitrageWorks() {
             Example Comparison
           </h3>
           <div className="flex justify-between">
-            <div className="w-[120px] h-[100px] bg-blue-500 text-white font-bold text-center flex flex-col items-center justify-center rounded">
+            <div className="w-[120px] h-[100px] bg-red-500 text-white font-bold text-center flex flex-col items-center justify-center rounded">
               <p className="text-sm">Kalshi</p>
               <p className="text-2xl">60¢</p>
               <p className="text-base">No</p>
             </div>
-            <div className="w-[120px] h-[100px] bg-pink-500 text-white font-bold text-center flex flex-col items-center justify-center rounded">
+            <div className="w-[120px] h-[100px] bg-green-500 text-white font-bold text-center flex flex-col items-center justify-center rounded">
               <p className="text-sm">Polymarket</p>
               <p className="text-2xl">20¢</p>
               <p className="text-base">Yes</p>
