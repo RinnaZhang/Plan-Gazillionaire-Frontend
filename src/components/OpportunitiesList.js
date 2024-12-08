@@ -21,28 +21,37 @@ const OpportunitiesList = () => {
         const arbitrageResponse = await axios.get(
           "https://plan-gazillionaire-872939346033.us-central1.run.app/api/v1/arbitrage"
         );
+        console.log("Arbitrage Response:", arbitrageResponse.data); // Log arbitrage data
+
 
         // Fetch bets with URLs
         const betsResponse = await axios.get(
           "https://plan-gazillionaire-872939346033.us-central1.run.app/api/v1/bets"
         );
+        console.log("Bets Response:", betsResponse.data); // Log bets data
 
         // Create a map of bet_id to bet_url
         const betUrlMap = betsResponse.data.reduce((map, bet) => {
           map[bet.bet_id] = bet.bet_url;
           return map;
         }, {});
+        console.log("Bet URL Map:", betUrlMap); // Log the map to ensure it's built correctly
 
         // Merge bet_url into arbitrage opportunities
-        const mergedOpportunities = arbitrageResponse.data.map((opp) => ({
-          ...opp,
-          bet_url: betUrlMap[opp.bet_id] || null,
-        }));
+        const mergedOpportunities = arbitrageResponse.data.map((opp) => {
+          return {
+            ...opp,
+            bet_url1: betUrlMap[opp.bet_id1] || null, // Map bet_url for bet_id1
+            bet_url2: betUrlMap[opp.bet_id2] || null, // Map bet_url for bet_id2
+          };
+        });
+        console.log("Merged Opportunities:", mergedOpportunities); // Log merged opportunities
 
         // Sort the opportunities
         const sortedOpportunities = mergedOpportunities.sort(
           (a, b) => b.profit - a.profit
         );
+        console.log("Sorted Opportunities:", sortedOpportunities); // Log sorted opportunities
 
         setOpportunities(sortedOpportunities);
         setFilteredOpportunities(sortedOpportunities);
@@ -155,9 +164,8 @@ const OpportunitiesList = () => {
 
       {/* Modal */}
       {selectedOpportunity && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3 className="modal-header">Details for Arbitrage Opportunity</h3>
+        <div className="modal-overlay" onClick={() => setSelectedOpportunity(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-details">
               <p>
                 <strong>Bet 1:</strong> {selectedOpportunity.bet_description_1} (
@@ -166,38 +174,54 @@ const OpportunitiesList = () => {
               <p>
                 <strong>Bet Side 1:</strong> {selectedOpportunity.bet_side_1}
               </p>
-              <hr className="my-2" />
+
+              {selectedOpportunity.bet_url1 ? (
+                <p>
+                  <button
+                    onClick={() => window.open(selectedOpportunity.bet_url1, "_blank", "noopener,noreferrer")}
+                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+                  >
+                    Place Bet
+                  </button>
+                </p>
+              ) : (
+                <p>
+                  <strong>Bet URL 1:</strong> N/A
+                </p>
+              )}
+
+              <hr className="my-4" />
+
               <p>
                 <strong>Bet 2:</strong> {selectedOpportunity.bet_description_2} (
                 {selectedOpportunity.website_2})
               </p>
               <p>
                 <strong>Bet Side 2:</strong> {selectedOpportunity.bet_side_2}
-              </p>
-              <p className="text-pink-400 font-bold">
-                Profit: ${selectedOpportunity.profit.toFixed(2)}
-              </p>
-              {selectedOpportunity.bet_url ? (
+
+              {selectedOpportunity.bet_url2 ? (
                 <p>
-                  <strong>Bet URL:</strong>{" "}
-                  <a
-                    href={selectedOpportunity.bet_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-300 underline"
-                  >
-                    View Bet
-                  </a>
-                </p>
+                <button
+                  onClick={() => window.open(selectedOpportunity.bet_url2, "_blank", "noopener,noreferrer")}
+                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+                >
+                  Place Bet
+                </button>
+              </p>
               ) : (
                 <p>
-                  <strong>Bet URL:</strong> N/A
+                  <strong>Bet URL 2:</strong> N/A
                 </p>
               )}
-              <p>
-                <strong>Timestamp:</strong>{" "}
-                {new Date(selectedOpportunity.timestamp).toLocaleString()}
+
+              <hr className="my-4" />
+
               </p>
+              <p className="text-pink-400 font-bold mt-4">
+                Profit: ${selectedOpportunity.profit.toFixed(2)}
+              </p>
+
+              
             </div>
             <button
               className="close-button"
