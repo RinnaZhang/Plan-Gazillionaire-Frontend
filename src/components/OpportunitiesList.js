@@ -43,6 +43,8 @@ const OpportunitiesList = () => {
             ...opp,
             bet_url1: betUrlMap[opp.bet_id1] || null, // Map bet_url for bet_id1
             bet_url2: betUrlMap[opp.bet_id2] || null, // Map bet_url for bet_id2
+            bet_amount_1: opp.bet_amount_1 || 0, // Add bet_amount_1 from the backend response
+            bet_amount_2: opp.bet_amount_2 || 0, // Add bet_amount_2 from the backend response
           };
         });
         console.log("Merged Opportunities:", mergedOpportunities); // Log merged opportunities
@@ -167,6 +169,8 @@ const OpportunitiesList = () => {
         <div className="modal-overlay" onClick={() => setSelectedOpportunity(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-details">
+
+              {/* Bet 1 Details */}
               <p>
                 <strong>Bet 1:</strong> {selectedOpportunity.bet_description_1} (
                 {selectedOpportunity.website_1})
@@ -174,11 +178,20 @@ const OpportunitiesList = () => {
               <p>
                 <strong>Bet Side 1:</strong> {selectedOpportunity.bet_side_1}
               </p>
-
+              <p>
+                <strong>Bet Amount:</strong> $
+                {selectedOpportunity.bet_amount_1?.toFixed(2) || "N/A"}
+              </p>
               {selectedOpportunity.bet_url1 ? (
                 <p>
                   <button
-                    onClick={() => window.open(selectedOpportunity.bet_url1, "_blank", "noopener,noreferrer")}
+                    onClick={() =>
+                      window.open(
+                        selectedOpportunity.bet_url1,
+                        "_blank",
+                        "noopener,noreferrer"
+                      )
+                    }
                     className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
                   >
                     Place Bet
@@ -192,22 +205,33 @@ const OpportunitiesList = () => {
 
               <hr className="my-4" />
 
+              {/* Bet 2 Details */}
               <p>
                 <strong>Bet 2:</strong> {selectedOpportunity.bet_description_2} (
                 {selectedOpportunity.website_2})
               </p>
               <p>
                 <strong>Bet Side 2:</strong> {selectedOpportunity.bet_side_2}
-
+              </p>
+              <p>
+                <strong>Bet Amount:</strong> $
+                {selectedOpportunity.bet_amount_2?.toFixed(2) || "N/A"}
+              </p>
               {selectedOpportunity.bet_url2 ? (
                 <p>
-                <button
-                  onClick={() => window.open(selectedOpportunity.bet_url2, "_blank", "noopener,noreferrer")}
-                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-                >
-                  Place Bet
-                </button>
-              </p>
+                  <button
+                    onClick={() =>
+                      window.open(
+                        selectedOpportunity.bet_url2,
+                        "_blank",
+                        "noopener,noreferrer"
+                      )
+                    }
+                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+                  >
+                    Place Bet
+                  </button>
+                </p>
               ) : (
                 <p>
                   <strong>Bet URL 2:</strong> N/A
@@ -216,7 +240,7 @@ const OpportunitiesList = () => {
 
               <hr className="my-4" />
 
-              </p>
+              
               <p className="text-pink-400 font-bold mt-4">
                 Profit: ${selectedOpportunity.profit.toFixed(2)}
               </p>
