@@ -172,7 +172,7 @@ const OpportunitiesList = () => {
 
               {/* Bet 1 Details */}
               <p>
-                <strong>Bet 1:</strong> {selectedOpportunity.bet_description_1} (
+                <strong>Bet 1:</strong> {selectedOpportunity.option_name_1} (
                 {selectedOpportunity.website_1})
               </p>
               <p>
@@ -207,7 +207,7 @@ const OpportunitiesList = () => {
 
               {/* Bet 2 Details */}
               <p>
-                <strong>Bet 2:</strong> {selectedOpportunity.bet_description_2} (
+                <strong>Bet 2:</strong> {selectedOpportunity.option_name_2} (
                 {selectedOpportunity.website_2})
               </p>
               <p>
