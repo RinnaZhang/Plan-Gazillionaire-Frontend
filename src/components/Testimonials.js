@@ -1,7 +1,7 @@
 import React from "react";
 import "../index.css";
-import kalshiScreenshot from "../assets/kalshi-screenshot.png";
-import polymarketScreenshot from "../assets/polymarket-screenshot.png";
+import kalshiScreenshot from "../assets/Kalshitiktok.png";
+import polymarketScreenshot from "../assets/Polytiktok.png";
 
 function Testimonials() {
   return (
@@ -11,21 +11,21 @@ function Testimonials() {
       </h2>
       <div className="testimonial-example bg-[#162639] p-6 rounded-lg shadow-md text-white">
         <h3 className="text-2xl font-semibold text-white-400 mb-4 bebas-neue-regular">
-          Example: Will Trump End the Department of Education?
+          Example: Will TikTok be banned in the US before May 2025?
         </h3>
         <p>
           The developer team identified an arbitrage opportunity by betting on{" "}
-          <span className="text-green-400">"Yes"</span> at Polymarket ($13) and{" "}
-          <span className="text-red-400">"No"</span> at Kalshi ($61). Combined,
-          the total cost of betting was $74, guaranteeing a return of $100.
+          <span className="text-green-400">"Yes"</span> at Polymarket ($30) and{" "}
+          <span className="text-red-400">"No"</span> at Kalshi ($70). Combined,
+          the total cost of betting was $100, guaranteeing a return of $107.
         </p>
         <p className="text-blue-400 mt-4 font-bold">
-          ROI: 24.5% | Annualized Return: 6.125%<br />
+          ROI: 7% | Annualized Return: 7%<br />
           <span className="text-pink-400">RISK-FREE PROFIT</span>
         </p>
         <div className="testimonials-images-container flex justify-center gap-6 mt-6">
           <a
-            href="https://kalshi.com/markets/kxdoed/doe-eliminated"
+            href="https://kalshi.com/markets/kxtiktokban/us-bans-tiktok#tiktokban-25apr30"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-105 transition transform duration-300"
@@ -37,7 +37,7 @@ function Testimonials() {
             />
           </a>
           <a
-            href="https://polymarket.com/event/trump-ends-department-of-education-in-first-100-days?tid=1733450332628"
+            href="https://polymarket.com/event/tiktok-banned-in-the-us-before-may-2025?tid=1733774354852"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-105 transition transform duration-300"
