@@ -15,12 +15,12 @@ function Testimonials() {
         </h3>
         <p>
           The developer team identified an arbitrage opportunity by betting on{" "}
-          <span className="text-green-400">"Yes"</span> at Polymarket ($28) and{" "}
-          <span className="text-red-400">"No"</span> at Kalshi ($65). Combined,
-          the total cost of betting was $93, guaranteeing a return of $100.
+          <span className="text-green-400">"Yes"</span> at Polymarket ($29) and{" "}
+          <span className="text-red-400">"No"</span> at Kalshi ($59). Combined,
+          the total cost of betting was 88, guaranteeing a return of $100.
         </p>
         <p className="text-blue-400 mt-4 font-bold">
-          ROI: 7% | Annualized Return: 7%<br />
+          ROI: 12% | Annualized Return: 12%<br />
           <span className="text-pink-400">RISK-FREE PROFIT</span>
         </p>
         <div className="testimonials-images-container flex justify-center gap-6 mt-6">
