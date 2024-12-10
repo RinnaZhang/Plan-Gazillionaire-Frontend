@@ -165,7 +165,7 @@ const OpportunitiesList = () => {
                 BET 1
               </h4>
               <p>
-                <strong>Event:</strong> {selectedOpportunity.bet_description_1}
+                <strong>Event:</strong> {selectedOpportunity.option_name_1}
               </p>
               <p>
                 <strong>Platform:</strong> {selectedOpportunity.website_1}
@@ -198,7 +198,7 @@ const OpportunitiesList = () => {
                 BET 2
               </h4>
               <p>
-                <strong>Event:</strong> {selectedOpportunity.bet_description_2}
+                <strong>Event:</strong> {selectedOpportunity.option_name_2}
               </p>
               <p>
                 <strong>Platform:</strong> {selectedOpportunity.website_2}
