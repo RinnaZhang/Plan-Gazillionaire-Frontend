@@ -231,10 +231,7 @@ const OpportunitiesList = () => {
                 Profit: ${selectedOpportunity.profit.toFixed(2)}
               </p>
 
-              <p className="text-sm text-gray-300">
-                <strong>Timestamp:</strong>{" "}
-                {new Date(selectedOpportunity.timestamp).toLocaleString()}
-              </p>
+              
             </div>
 
             <button
