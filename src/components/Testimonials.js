@@ -17,7 +17,7 @@ function Testimonials() {
           The developer team identified an arbitrage opportunity by betting on{" "}
           <span className="text-green-400">"Yes"</span> at Polymarket ($29) and{" "}
           <span className="text-red-400">"No"</span> at Kalshi ($59). Combined,
-          the total cost of betting was 88, guaranteeing a return of $100.
+          the total cost of betting was $88, guaranteeing a return of $100.
         </p>
         <p className="text-blue-400 mt-4 font-bold">
           ROI: 12% | Annualized Return: 12%<br />
@@ -25,7 +25,7 @@ function Testimonials() {
         </p>
         <div className="testimonials-images-container flex justify-center gap-6 mt-6">
           <a
-            href="https://kalshi.com/markets/kxtiktokban/us-bans-tiktok#tiktokban-25apr30"
+            href="https://polymarket.com/event/tiktok-banned-in-the-us-before-may-2025?tid=1733774354852"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-105 transition transform duration-300"
@@ -37,7 +37,7 @@ function Testimonials() {
             />
           </a>
           <a
-            href="https://polymarket.com/event/tiktok-banned-in-the-us-before-may-2025?tid=1733774354852"
+            href="https://kalshi.com/markets/kxtiktokban/us-bans-tiktok#tiktokban-25apr30"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-105 transition transform duration-300"
